@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\ShFrwk">
+      <UniqueIdentifier>{6fc17f75-3d27-4d59-b4cf-8f4000832e61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ShFrwk Headers">
+      <UniqueIdentifier>{5ab8ebd3-e235-45ec-b214-f76cbe032cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Icons">
+      <UniqueIdentifier>{f29bcabb-c403-40fa-9538-810a9d950a89}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\CategoryProvider.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\CommandProvider.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\ContextMenu.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\DataObject.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\DropTarget.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\EnumIDList.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\FileStream.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\IdentityName.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\ImagePreviewHandler.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\ImageThumbProvider.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\LaunchFile.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\NseFileSystem.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\PropertyStore.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\PropSheetExt.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\QueryInfo.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\SendTo.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\ShellExt.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\ShellExt2.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\ShellFolder.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\ShFrwk.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\shfrwkres.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\ShUtils.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\TransferItem.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\WebPreviewHandler.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ShFrwk\WebThumbProvider.h">
+      <Filter>Header Files\ShFrwk Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NamedPipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\CategoryProvider.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\CommandProvider.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\ContextMenu.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\DataObject.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\DllMain.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\DropTarget.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\EnumIDList.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\FileStream.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\IdentityName.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\ImagePreviewHandler.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\ImageThumbProvider.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\LaunchFile.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\NseBaseItem.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\NseFileItem.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\NseFilePropPages.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\NseFileSystem.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\PropertyStore.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\PropSheetExt.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\QueryInfo.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\SendTo.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\ShellFolder.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\ShUtils.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\TransferItem.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\WebPreviewHandler.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ShFrwk\WebThumbProvider.cpp">
+      <Filter>Source Files\ShFrwk</Filter>
+    </ClCompile>
+    <ClCompile Include="MigRavenDrive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MigRavenFileSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MigRavenFileStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MigRavenFileItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NamedPipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MigRavenDrive.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MigRavenDrive.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellFolder.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellLocJunction.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellLocRooted.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellRootContextMenu.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellRootDropTarget.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellRootPreview.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellRootPropSheet.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellRootSendTo.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\ShFrwk\res\ShellRootShellNew.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\migRavenIcon.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\archive.bmp">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\delete.bmp">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\empty.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\filled.ico">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\folder-delete.bmp">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\folder-edit.bmp">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\folder-new.bmp">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\internet.bmp">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+    <Image Include="res\migraven.bmp">
+      <Filter>Resource Files\Icons</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

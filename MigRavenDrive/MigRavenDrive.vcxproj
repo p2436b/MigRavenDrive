@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{CAE2A125-C415-4B57-BE8E-C853BC25972D}</ProjectGuid>
+    <Keyword>AtlProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir);..\ShFrwk;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir);..\ShFrwk;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir);..\ShFrwk;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir);..\ShFrwk;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>MigRavenDrive_i.h</HeaderFileName>
+      <InterfaceIdentifierFileName>MigRavenDrive_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>MigRavenDrive_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)MigRavenDrive.tlb</TypeLibraryName>
+      <DllDataFileName />
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <ModuleDefinitionFile>.\MigRavenDrive.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>MigRavenDrive_i.h</HeaderFileName>
+      <InterfaceIdentifierFileName>MigRavenDrive_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>MigRavenDrive_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)MigRavenDrive.tlb</TypeLibraryName>
+      <DllDataFileName />
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <ModuleDefinitionFile>.\MigRavenDrive.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>MigRavenDrive_i.h</HeaderFileName>
+      <InterfaceIdentifierFileName>MigRavenDrive_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>MigRavenDrive_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)MigRavenDrive.tlb</TypeLibraryName>
+      <DllDataFileName />
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <ModuleDefinitionFile>.\MigRavenDrive.def</ModuleDefinitionFile>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;NDEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <HeaderFileName>MigRavenDrive_i.h</HeaderFileName>
+      <InterfaceIdentifierFileName>MigRavenDrive_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>MigRavenDrive_p.c</ProxyFileName>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)MigRavenDrive.tlb</TypeLibraryName>
+      <DllDataFileName />
+      <ValidateAllParameters>true</ValidateAllParameters>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <ModuleDefinitionFile>.\MigRavenDrive.def</ModuleDefinitionFile>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\ShFrwk\CategoryProvider.h" />
+    <ClInclude Include="..\ShFrwk\CommandProvider.h" />
+    <ClInclude Include="..\ShFrwk\ContextMenu.h" />
+    <ClInclude Include="..\ShFrwk\DataObject.h" />
+    <ClInclude Include="..\ShFrwk\DropTarget.h" />
+    <ClInclude Include="..\ShFrwk\EnumIDList.h" />
+    <ClInclude Include="..\ShFrwk\FileStream.h" />
+    <ClInclude Include="..\ShFrwk\IdentityName.h" />
+    <ClInclude Include="..\ShFrwk\ImagePreviewHandler.h" />
+    <ClInclude Include="..\ShFrwk\ImageThumbProvider.h" />
+    <ClInclude Include="..\ShFrwk\LaunchFile.h" />
+    <ClInclude Include="..\ShFrwk\NseFileSystem.h" />
+    <ClInclude Include="..\ShFrwk\PropertyStore.h" />
+    <ClInclude Include="..\ShFrwk\PropSheetExt.h" />
+    <ClInclude Include="..\ShFrwk\QueryInfo.h" />
+    <ClInclude Include="..\ShFrwk\SendTo.h" />
+    <ClInclude Include="..\ShFrwk\ShellExt.h" />
+    <ClInclude Include="..\ShFrwk\ShellExt2.h" />
+    <ClInclude Include="..\ShFrwk\ShellFolder.h" />
+    <ClInclude Include="..\ShFrwk\ShFrwk.h" />
+    <ClInclude Include="..\ShFrwk\shfrwkres.h" />
+    <ClInclude Include="..\ShFrwk\ShUtils.h" />
+    <ClInclude Include="..\ShFrwk\TransferItem.h" />
+    <ClInclude Include="..\ShFrwk\WebPreviewHandler.h" />
+    <ClInclude Include="..\ShFrwk\WebThumbProvider.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="NamedPipe.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\ShFrwk\CategoryProvider.cpp" />
+    <ClCompile Include="..\ShFrwk\CommandProvider.cpp" />
+    <ClCompile Include="..\ShFrwk\ContextMenu.cpp" />
+    <ClCompile Include="..\ShFrwk\DataObject.cpp" />
+    <ClCompile Include="..\ShFrwk\DllMain.cpp" />
+    <ClCompile Include="..\ShFrwk\DropTarget.cpp" />
+    <ClCompile Include="..\ShFrwk\EnumIDList.cpp" />
+    <ClCompile Include="..\ShFrwk\FileStream.cpp" />
+    <ClCompile Include="..\ShFrwk\IdentityName.cpp" />
+    <ClCompile Include="..\ShFrwk\ImagePreviewHandler.cpp" />
+    <ClCompile Include="..\ShFrwk\ImageThumbProvider.cpp" />
+    <ClCompile Include="..\ShFrwk\LaunchFile.cpp" />
+    <ClCompile Include="..\ShFrwk\NseBaseItem.cpp" />
+    <ClCompile Include="..\ShFrwk\NseFileItem.cpp" />
+    <ClCompile Include="..\ShFrwk\NseFilePropPages.cpp" />
+    <ClCompile Include="..\ShFrwk\NseFileSystem.cpp" />
+    <ClCompile Include="..\ShFrwk\PropertyStore.cpp" />
+    <ClCompile Include="..\ShFrwk\PropSheetExt.cpp" />
+    <ClCompile Include="..\ShFrwk\QueryInfo.cpp" />
+    <ClCompile Include="..\ShFrwk\SendTo.cpp" />
+    <ClCompile Include="..\ShFrwk\ShellFolder.cpp" />
+    <ClCompile Include="..\ShFrwk\ShUtils.cpp" />
+    <ClCompile Include="..\ShFrwk\TransferItem.cpp" />
+    <ClCompile Include="..\ShFrwk\WebPreviewHandler.cpp" />
+    <ClCompile Include="..\ShFrwk\WebThumbProvider.cpp" />
+    <ClCompile Include="MigRavenDrive.cpp" />
+    <ClCompile Include="MigRavenFileItem.cpp" />
+    <ClCompile Include="MigRavenFileSystem.cpp" />
+    <ClCompile Include="MigRavenFileStream.cpp" />
+    <ClCompile Include="NamedPipe.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MigRavenDrive.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\ShFrwk\res\ShellFolder.rgs" />
+    <None Include="..\ShFrwk\res\ShellLocJunction.rgs" />
+    <None Include="..\ShFrwk\res\ShellLocRooted.rgs" />
+    <None Include="..\ShFrwk\res\ShellRootContextMenu.rgs" />
+    <None Include="..\ShFrwk\res\ShellRootDropTarget.rgs" />
+    <None Include="..\ShFrwk\res\ShellRootPreview.rgs" />
+    <None Include="..\ShFrwk\res\ShellRootPropSheet.rgs" />
+    <None Include="..\ShFrwk\res\ShellRootSendTo.rgs" />
+    <None Include="..\ShFrwk\res\ShellRootShellNew.rgs" />
+    <None Include="MigRavenDrive.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\archive.bmp" />
+    <Image Include="res\delete.bmp" />
+    <Image Include="res\empty.ico" />
+    <Image Include="res\filled.ico" />
+    <Image Include="res\folder-delete.bmp" />
+    <Image Include="res\folder-edit.bmp" />
+    <Image Include="res\folder-new.bmp" />
+    <Image Include="res\internet.bmp" />
+    <Image Include="res\migraven.bmp" />
+    <Image Include="res\migRavenIcon.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
