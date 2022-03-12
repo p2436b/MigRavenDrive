@@ -11,14 +11,22 @@
 #define IDS_NSE_VENDOR                  205
 #define IDS_NSE_VOLUME                  206
 #define IDS_NSE_URLPROTOCOL             207
+#define IDS_FSS_HASLIFETIME             208
+#define IDS_COLUMN_FSSSTATUS            209
+#define IDS_COLUMN_FILESCOUNT           210
+#define IDS_COLUMN_DELETIONDATE         211
+#define IDS_COLUMN_DATESCANED           212
+#define IDS_COLUMN_ACCOUNTSCOUNT        213
+#define IDS_COLUMN_PERMISSIONS          214
+#define IDS_COLUMN_FOLDERAGE            215
+#define IDS_COLUMN_INSTRUCTION          216
+#define IDS_COLUMN_LIFETIMEBAR          217
 #define IDB_MIGRAVEN                    300
 #define IDB_NEW_FOLDER                  301
 #define IDB_EDIT_FOLDER                 302
 #define IDB_DELETE_FOLDER               303
 #define IDB_ARCHIVE_FOLDER              304
 #define IDB_WEB                         305
-#define ID_FOLDERSELFSERVICE_NEWFOLDER  401
-#define ID_FOLDERSELFSERVICE_OPENWEBCLIENT 404
 
 // Next default values for new objects
 // 
