@@ -56,6 +56,7 @@ HRESULT CMigRavenFileItem::GetColumnInfo(UINT iColumn, VFS_COLUMNINFO& Column)
      { PKEY_FileExtension,               SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         0 },
      { PKEY_ParsingName,                 SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
      { PKEY_ParsingPath,                 SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_PreviewPaneIconStatus,       SHCOLSTATE_SLOW | SHCOLSTATE_SECONDARYUI,                        VFS_COLF_NOTCOLUMN },
      { PKEY_PerceivedType,               SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
      { PKEY_SFGAOFlags,                  SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
      { PKEY_Volume_IsRoot,               SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
@@ -75,6 +76,103 @@ HRESULT CMigRavenFileItem::GetColumnInfo(UINT iColumn, VFS_COLUMNINFO& Column)
 
 HRESULT CMigRavenFileItem::GetProperty(REFPROPERTYKEY pkey, CComPropVariant& v)
 {
+  if (IsEqualPropertyKey(pkey, PKEY_FilesCount))
+  {
+    return InitPropVariantFromUInt32(m_pMfd->dwFilesCount, &v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_AccountCount))
+  {
+    return InitPropVariantFromUInt32(m_pMfd->dwAccountCount, &v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_StatusProgressBar))
+  {
+    if (m_pMfd->dwLifetimePercentage == 0)
+    {
+      v.vt = VT_EMPTY;
+      return E_NOTIMPL;
+    }
+    return InitPropVariantFromUInt32(m_pMfd->dwLifetimePercentage, &v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_DateDelete))
+  {
+    FILETIME noTime{ 3577643008,27111902 };
+    if (CompareFileTime(&m_pMfd->ftDeleteDate, &noTime) != 0)
+      return InitPropVariantFromFileTime(&m_pMfd->ftDeleteDate, &v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_ScanDate))
+  {
+    return InitPropVariantFromFileTime(&m_pMfd->ftScanDate, &v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_FolderAge))
+  {
+    return InitPropVariantFromString(m_pMfd->wszFolderAge, &v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_Permissions))
+  {
+    return InitPropVariantFromString(m_pMfd->wszPermissions, &v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_Instruction))
+  {
+    return InitPropVariantFromString(m_pMfd->wszInstruction, &v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_UIIconStatus))
+  {
+    const vector<PROPERTYKEY> propKeys{ PKEY_IconStatus };
+    return GetStatusIcon(2, m_pMfd->dwStatusIcon, propKeys, L"prop:MigRavenDrive.IconStatus", v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_AgeIconStatus))
+  {
+    const vector<PROPERTYKEY> propKeys
+    {
+      PKEY_AgeStatus1,
+      PKEY_AgeStatus2,
+      PKEY_AgeStatus3,
+      PKEY_AgeStatus4,
+      PKEY_AgeStatus5,
+      PKEY_AgeStatus6,
+      PKEY_AgeStatus7,
+      PKEY_AgeStatus8
+    };
+
+    return GetStatusIcon(
+      2, 
+      m_pMfd->dwAgeBarCategory,
+      propKeys,
+      LR"(prop:MigRavenDrive.AgeStatus1;MigRavenDrive.AgeStatus2;MigRavenDrive.AgeStatus3;MigRavenDrive.AgeStatus4;
+      MigRavenDrive.AgeStatus5;MigRavenDrive.AgeStatus6;MigRavenDrive.AgeStatus7;MigRavenDrive.AgeStatus8;)",
+      v);
+  }
+
+  if (IsEqualPropertyKey(pkey, PKEY_PreviewPaneIconStatus))
+  {
+    const vector<PROPERTYKEY> propKeys{ PKEY_IconStatus };
+    return GetStatusIcon(3, m_pMfd->dwStatusIcon, propKeys, L"prop:MigRavenDrive.IconStatus", v);
+  }
+
+  if (m_pMfd->dwAttributes == MR_ATTRIBUTE_MIGFOLDER)
+  {
+    if (IsEqualPropertyKey(pkey, PKEY_PropList_PreviewDetails))
+      return InitPropVariantFromString(L"prop:MigRavenDrive.ScanDate;MigRavenDrive.AccountCount;MigRavenDrive.Permissions;System.DateCreated;MigRavenDrive.DateDelete;MigRavenDrive.FolderAge;MigRavenDrive.FilesCount;System.ItemPathDisplay;MigRavenDrive.Instruction;MigRavenDrive.StatusProgressBar;MigRavenDrive.PreviewPaneIConStatus;", &v);
+
+    if (IsEqualPropertyKey(pkey, PKEY_PropList_ContentViewModeForBrowse))
+      return InitPropVariantFromString(L"prop:System.ItemNameDisplay;MigRavenDrive.StatusProgressBar;", &v);
+
+    if (IsEqualPropertyKey(pkey, PKEY_PropList_TileInfo))
+      return InitPropVariantFromString(L"prop:MigRavenDrive.StatusProgressBar;MigRavenDrive.UIIConStatus;", &v);
+
+    if (IsEqualPropertyKey(pkey, PKEY_PropList_InfoTip))
+      return InitPropVariantFromString(L"prop:MigRavenDrive.ScanDate;MigRavenDrive.AccountCount;MigRavenDrive.Permissions;System.DateCreated;MigRavenDrive.DateDelete;MigRavenDrive.FolderAge;MigRavenDrive.FilesCount;System.ItemPathDisplay;MigRavenDrive.Instruction;", &v);
+  }
+
   return CNseFileItem::GetProperty(pkey, v);
 }
 
@@ -360,4 +458,47 @@ HMENU CMigRavenFileItem::GenerateMenu(const vector<MENU_ITEM>& vMenuItems) const
   AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hViewMenu, L"ViewMenu");
 
   return hMenu;
+}
+
+HRESULT CMigRavenFileItem::GetStatusIcon(BYTE type, BYTE iconIndex, const vector<PROPERTYKEY>& propKeys, PCWSTR propStr, CComPropVariant& v)
+{
+  PROPVARIANT tmp;
+  CComPtr<IPropertyStore> pPropertyStore;
+  CComPtr<IPersistSerializedPropStorage> pPSP;
+  SERIALIZEDPROPSTORAGE* pSP;
+  DWORD cbSize = 0;
+
+  auto hr = PSCreateMemoryPropertyStore(IID_PPV_ARGS(&pPropertyStore));
+
+  hr = InitPropVariantFromString(propStr, &tmp);
+  pPropertyStore->SetValue(PKEY_PropList_StatusIcons, tmp);
+
+  hr = InitPropVariantFromUInt32(type, &tmp);
+  pPropertyStore->SetValue(PKEY_PropList_StatusIconsDisplayFlag, tmp);
+
+  if (propKeys.size() <= 1)
+  {
+    InitPropVariantFromUInt32(iconIndex, &tmp);
+    pPropertyStore->SetValue(propKeys[0], tmp);
+  }
+  else
+  {
+    for (size_t i = 0; i < propKeys.size(); i++)
+    {
+      InitPropVariantFromUInt32(i + 1 <= iconIndex ? 1 : 2, &tmp);
+      pPropertyStore->SetValue(propKeys[i], tmp);
+    }
+  }
+
+  pPropertyStore->QueryInterface(&pPSP);
+
+  hr = pPSP->GetPropertyStorage(&pSP, &cbSize);
+
+  v.vt = VT_BLOB;
+  v.blob.pBlobData = (BYTE*)pSP;
+  v.blob.cbSize = cbSize;
+
+  PropVariantClear(&tmp);
+
+  return hr;
 }
