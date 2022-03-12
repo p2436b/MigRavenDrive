@@ -4,6 +4,7 @@
 #include <string>
 #include <Utils.h>
 #include <NamedPipe.h>
+#include "ShPropKeys.h"
 
 CMigRavenFileItem::CMigRavenFileItem(CShellFolder* pFolder, PCIDLIST_RELATIVE pidlFolder, PCITEMID_CHILD pidlItem, BOOL bReleaseItem) :
   CNseFileItem(pFolder, pidlFolder, pidlItem, bReleaseItem)
@@ -27,6 +28,49 @@ CMigRavenFileItem::CMigRavenFileItem(CShellFolder* pFolder, PCIDLIST_RELATIVE pi
 SFGAOF CMigRavenFileItem::GetSFGAOF(SFGAOF dwMask)
 {
   return CNseFileItem::GetSFGAOF(dwMask);
+}
+
+HRESULT CMigRavenFileItem::GetColumnInfo(UINT iColumn, VFS_COLUMNINFO& Column)
+{
+  static vector<VFS_COLUMNINFO> aColumns = {
+     { PKEY_ItemNameDisplay,             SHCOLSTATE_TYPE_STR | SHCOLSTATE_ONBYDEFAULT,                    0 },
+     { PKEY_ItemTypeText,                SHCOLSTATE_TYPE_STR | SHCOLSTATE_ONBYDEFAULT | SHCOLSTATE_SLOW,  0 },
+     { PKEY_Size,                        SHCOLSTATE_TYPE_INT | SHCOLSTATE_ONBYDEFAULT,                    0 },
+     { PKEY_FilesCount,                  SHCOLSTATE_TYPE_INT | SHCOLSTATE_SECONDARYUI,                    0 },
+     { PKEY_DateDelete,                  SHCOLSTATE_TYPE_DATE | SHCOLSTATE_SECONDARYUI,                   0 },
+     { PKEY_ScanDate,                    SHCOLSTATE_TYPE_DATE | SHCOLSTATE_SECONDARYUI,                   0 },
+     { PKEY_DateCreated,                 SHCOLSTATE_TYPE_DATE | SHCOLSTATE_ONBYDEFAULT,                   0 },
+     { PKEY_DateModified,                SHCOLSTATE_TYPE_DATE | SHCOLSTATE_SECONDARYUI,                   0 },
+     { PKEY_UIIconStatus,                SHCOLSTATE_SLOW | SHCOLSTATE_SECONDARYUI,                        0 },
+     { PKEY_AgeIconStatus,               SHCOLSTATE_SLOW | SHCOLSTATE_SECONDARYUI,                        0 },
+     { PKEY_StatusProgressBar,           SHCOLSTATE_SLOW | SHCOLSTATE_SECONDARYUI,                        0 },
+     { PKEY_ItemPathDisplay,             SHCOLSTATE_TYPE_STR | SHCOLSTATE_SECONDARYUI,                    0 },
+     { PKEY_AccountCount,                SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_FolderAge,                   SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_Instruction,                 SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_Permissions,                 SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_ItemType,                    SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_ItemPathDisplayNarrow,       SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_ItemFolderPathDisplayNarrow, SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_FileName,                    SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         VFS_COLF_WRITEABLE },
+     { PKEY_FileExtension,               SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_ParsingName,                 SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_ParsingPath,                 SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         0 },
+     { PKEY_PerceivedType,               SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+     { PKEY_SFGAOFlags,                  SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+     { PKEY_Volume_IsRoot,               SHCOLSTATE_TYPE_INT | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+     { PKEY_PropList_InfoTip,            SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+     { PKEY_PropList_TileInfo,           SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+     { PKEY_PropList_FullDetails,        SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+     { PKEY_PropList_PreviewTitle,       SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+     { PKEY_PropList_PreviewDetails,     SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+     { PKEY_PropList_ExtendedTileInfo,   SHCOLSTATE_TYPE_STR | SHCOLSTATE_HIDDEN,                         VFS_COLF_NOTCOLUMN },
+  };
+
+  if (iColumn >= aColumns.size())
+    return E_FAIL;
+  Column = aColumns[iColumn];
+  return S_OK;
 }
 
 HRESULT CMigRavenFileItem::GetProperty(REFPROPERTYKEY pkey, CComPropVariant& v)

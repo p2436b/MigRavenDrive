@@ -102,6 +102,8 @@ public:
 
   virtual SFGAOF GetSFGAOF(SFGAOF dwMask) override;
 
+  virtual HRESULT GetColumnInfo(UINT iColumn, VFS_COLUMNINFO& Column) override;
+
   virtual HRESULT GetProperty(REFPROPERTYKEY pkey, CComPropVariant& v) override;
 
   virtual HRESULT SetProperty(REFPROPERTYKEY pkey, const CComPropVariant& v) override;
