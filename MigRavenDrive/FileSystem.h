@@ -4,15 +4,21 @@
 #include <json.hpp>
 
 using JSON = nlohmann::json;
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Definitions
 
 #define MIGRAVEN_MAGIC_ID  0x55
 
-#define MR_ATTRIBUTE_CATEGORY             0x00000001  
-#define MR_ATTRIBUTE_MIGFOLDER            0x00000002  
-#define MR_ATTRIBUTE_SYSTEM               0x00000003
+#define MR_ATTRIBUTE_ROOT        0x00000001  
+#define MR_ATTRIBUTE_CATEGORY    0x00000002
+#define MR_ATTRIBUTE_MIGFOLDER   0x00000003
+#define MR_ATTRIBUTE_SYSTEM      0x00000004
+
+#define LANGUAGE_ENGLISH    L"en-US"
+#define LANGUAGE_GERMAN     L"de-DE"
+#define LANGUAGE_PERSIAN    L"fa-IR"
 
 #define ID_CONTEXT_FSS_NEWFOLDER  3
 #define ID_CONTEXT_FSS_EDITFOLDER  4
@@ -21,6 +27,13 @@ using JSON = nlohmann::json;
 #define ID_CONTEXT_FSS_ARCHIVEFOLDER  7
 #define ID_CONTEXT_FSS_MIGRATEFOLDER  8
 #define ID_CONTEXT_FSS_WEBCLIENT  9
+
+struct MENU_ITEM {
+  UINT uFlags;
+  UINT_PTR uIDNewItem;
+  LPCWSTR lpNewItem;
+  INT bitmapIconId;
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // CMigRavenModule
@@ -124,6 +137,8 @@ private:
   HRESULT EnumSystemItems(HWND hwndOwner, SHCONTF grfFlags, CSimpleValArray<CNseItem*>& aList);
 
   HMENU GetFSSMenu(DWORD itemType, BOOL isFolder) const;
+
+  HMENU GenerateMenu(const vector<MENU_ITEM>& vMenuItems) const;
 };
 
 
