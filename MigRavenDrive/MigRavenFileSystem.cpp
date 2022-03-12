@@ -31,7 +31,6 @@ BOOL CMigRavenModule::GetConfigBool(VFS_CONFIG Item)
 {
   switch (Item) {
 
-  case VFS_INSTALL_SHELLNEW:
   case VFS_INSTALL_DROPTARGET:
   case VFS_INSTALL_CONTEXTMENU:
     return TRUE;
