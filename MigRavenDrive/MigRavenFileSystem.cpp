@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "FileSystem.h"
+#include <PathCch.h>
+#include <Utils.h>
 
 LONG CMigRavenModule::GetConfigInt(VFS_CONFIG Item)
 {
@@ -68,11 +70,15 @@ HRESULT CMigRavenModule::CreateFileSystem(PCIDLIST_ABSOLUTE pidlRoot, CNseFileSy
 
 HRESULT CMigRavenModule::DllInstall()
 {
+  if (FAILED(RegisterPropdesc(TRUE)))
+    MessageBox(nullptr, L"Failed to register PropertySchema.", L"Error", MB_ICONERROR);
   return S_OK;
 }
 
 HRESULT CMigRavenModule::DllUninstall()
 {
+  if (FAILED(RegisterPropdesc(FALSE)))
+    MessageBox(nullptr, L"Failed to unregister PropertySchema.", L"Error", MB_ICONERROR);
   return S_OK;
 }
 
@@ -84,6 +90,41 @@ HRESULT CMigRavenModule::ShellAction(LPCWSTR pstrType, LPCWSTR pstrCmdLine)
 BOOL CMigRavenModule::DllMain(DWORD dwReason, LPVOID lpReserved)
 {
   return TRUE;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Private functions
+
+HRESULT CMigRavenModule::RegisterPropdesc(BOOL regPropdesc)
+{
+  auto moduleDir = new WCHAR[MAX_PATH];
+  GetModuleFileName(_pModule->GetModuleInstance(), moduleDir, MAX_PATH);
+  PathCchRemoveFileSpec(moduleDir, MAX_PATH);
+
+  wstring modulePath = moduleDir + L"\\MigRavenDrive.dll"s;
+  wstring propDescPath = moduleDir + L"\\MigRavenDrive.propdesc"s;
+
+  auto hr = S_OK;
+  if (regPropdesc) {
+    wstring data = ReadFile(propDescPath);
+    ReplaceAll(data, L"DllFilePath", modulePath);
+    SaveFile(propDescPath, data);
+
+    hr = PSRegisterPropertySchema(propDescPath.c_str());
+    if (FAILED(hr)) return hr;
+  }
+  else
+  {
+    hr = PSUnregisterPropertySchema(propDescPath.c_str());
+    if (FAILED(hr)) return hr;
+  }
+
+  hr = PSRefreshPropertySchema();
+  if (FAILED(hr)) return hr;
+
+  SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, nullptr, nullptr);
+  return S_OK;
 }
 
 

@@ -59,6 +59,8 @@ public:
 
   virtual BOOL DllMain(DWORD dwReason, LPVOID lpReserved) override;
 
+private:
+  HRESULT RegisterPropdesc(BOOL regPropdesc);
 };
 
 
