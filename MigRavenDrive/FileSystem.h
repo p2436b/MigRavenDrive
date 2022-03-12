@@ -140,9 +140,9 @@ private:
 
   HRESULT EnumSystemItems(HWND hwndOwner, SHCONTF grfFlags, CSimpleValArray<CNseItem*>& aList);
 
-  HMENU GetFSSMenu(DWORD itemType, BOOL isFolder) const;
-
   HMENU GenerateMenu(const vector<MENU_ITEM>& vMenuItems) const;
+
+  HRESULT GetStatusIcon(BYTE type, BYTE iconIndex, const vector<PROPERTYKEY>& propKeys, PCWSTR propStr, CComPropVariant& v);
 };
 
 
