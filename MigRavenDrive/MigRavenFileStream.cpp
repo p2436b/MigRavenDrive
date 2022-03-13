@@ -1,55 +1,126 @@
 #include "pch.h"
 #include "FileSystem.h"
 
-CMigRavenFileStream::CMigRavenFileStream(CMigRavenFileSystem* pFS, LPCWSTR pstrFilename, UINT uAccess)
+CMigRavenFileStream::CMigRavenFileStream(CMigRavenFileSystem* pFS, LPCWSTR pstrFilename, UINT uAccess, DWORD dwFileSize):
+  m_uAccess(uAccess), m_pData(nullptr), m_dwCurPos(0), m_dwFileSize(dwFileSize), m_dwAllocSize(10L * 1024L)
 {
+  m_spFS = pFS;
+  wcscpy_s(m_wszFilename, lengthof(m_wszFilename), pstrFilename);
 }
 
 CMigRavenFileStream::~CMigRavenFileStream()
 {
+  Close();
 }
 
 HRESULT CMigRavenFileStream::Init()
 {
-  return E_NOTIMPL;
+  return S_OK;
 }
 
 HRESULT CMigRavenFileStream::Read(LPVOID pData, ULONG dwSize, ULONG& dwRead)
 {
-  return E_NOTIMPL;
+  dwRead = 0;
+  // We cannot mix reads and writes on same stream
+  if (m_uAccess != GENERIC_READ) return E_ACCESSDENIED;
+  // Read the entire file now and keep the contents in a memory buffer
+  if (m_pData == NULL) {
+    HR(ReadSystemFile(m_wszFilename, &m_pData, m_dwFileSize));
+  }
+  // Transfer data from memory buffer
+  dwRead = dwSize;
+  if (m_dwCurPos + dwSize > m_dwFileSize) dwRead = m_dwFileSize - m_dwCurPos;
+  ::CopyMemory(pData, m_pData + m_dwCurPos, dwRead);
+  m_dwCurPos += dwRead;
+  return dwRead > 0 ? S_OK : S_FALSE;
 }
 
 HRESULT CMigRavenFileStream::Write(LPCVOID pData, ULONG dwSize, ULONG& dwWritten)
 {
-  return E_NOTIMPL;
+  dwWritten = 0;
+  // Cannot mix reads and writes on same stream
+  if (m_uAccess != GENERIC_WRITE) return E_ACCESSDENIED;
+  // Grow the buffer?
+  if (m_dwCurPos + dwSize > m_dwAllocSize || m_pData == NULL) {
+    while (m_dwCurPos + dwSize > m_dwAllocSize) m_dwAllocSize *= 2;
+    m_pData = (LPBYTE)realloc(m_pData, m_dwAllocSize);
+    if (m_pData == NULL) return E_OUTOFMEMORY;
+  }
+  // NOTE: We limit the filesize because we're currently using
+  //       a memory buffer to hold it all. No need to deplete the
+  //       system for resources.
+  const DWORD MAX_FILESIZE_IN_MB = 80L;
+  if (m_dwAllocSize > MAX_FILESIZE_IN_MB * 1024L * 1024L) {
+    return AtlHresultFromWin32(ERROR_FILE_TOO_LARGE);
+  }
+  // Transfer data to memory buffer
+  ::CopyMemory(m_pData + m_dwCurPos, pData, dwSize);
+  // Update file pointers
+  m_dwCurPos += dwSize;
+  if (m_dwCurPos > m_dwFileSize) m_dwFileSize = m_dwCurPos;
+  dwWritten = dwSize;
+  return dwWritten > 0 ? S_OK : S_FALSE;
 }
 
 HRESULT CMigRavenFileStream::Seek(DWORD dwPos)
 {
-  return E_NOTIMPL;
+  if (m_uAccess == GENERIC_WRITE) return E_ACCESSDENIED;
+  if (dwPos > m_dwFileSize) dwPos = m_dwFileSize;
+  m_dwCurPos = dwPos;
+  return S_OK;
 }
 
 HRESULT CMigRavenFileStream::GetCurPos(DWORD* pdwPos)
 {
-  return E_NOTIMPL;
+  *pdwPos = m_dwCurPos;
+  return S_OK;
 }
 
 HRESULT CMigRavenFileStream::GetFileSize(DWORD* pdwFileSize)
 {
-  return E_NOTIMPL;
+  *pdwFileSize = m_dwFileSize;
+  return S_OK;
 }
 
 HRESULT CMigRavenFileStream::SetFileSize(DWORD dwSize)
 {
-  return E_NOTIMPL;
+  return S_OK;
 }
 
 HRESULT CMigRavenFileStream::Commit()
 {
-  return E_NOTIMPL;
+  if (m_pData == NULL) return S_OK;
+  if (m_uAccess != GENERIC_WRITE) return E_FAIL;
+  // On file creation, we write file contents to memory first, then
+  // commit everything to disk on file close. This is the commit phase.
+  HR(WriteSystemFile(m_wszFilename, &m_pData, m_dwFileSize, FILE_ATTRIBUTE_NORMAL));
+  return S_OK;
 }
 
 HRESULT CMigRavenFileStream::Close()
 {
+  if (m_pData != NULL) free(m_pData);
+  m_pData = NULL;
+  return S_OK;
+}
+
+HRESULT CMigRavenFileStream::ReadSystemFile(LPCWSTR pwstrFileName, LPBYTE* ppbBuffer, DWORD& dwFileSize)
+{
+  auto hr = S_OK;
+  auto* hFile = CreateFile(pwstrFileName, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+  if (hFile == INVALID_HANDLE_VALUE) return AtlHresultFromLastError();
+  LPBYTE pBuffer = static_cast<LPBYTE>(malloc(dwFileSize));
+  if (pBuffer == nullptr) hr = E_OUTOFMEMORY, dwFileSize = 0;
+  DWORD dwBytesRead = 0;
+  ReadFile(hFile, pBuffer, dwFileSize, &dwBytesRead, nullptr);
+  if (dwBytesRead != dwFileSize) hr = AtlHresultFromLastError();
+  if (FAILED(hr)) free(pBuffer); else *ppbBuffer = pBuffer;
+  CloseHandle(hFile);
+  return hr;
+}
+
+HRESULT CMigRavenFileStream::WriteSystemFile(LPCWSTR pwstrFileName, LPBYTE* ppbBuffer, DWORD& dwFileSize, DWORD dwFlagsAndAttributes)
+{
+  MessageBox(0, L"CMigRavenFileStream::WriteSystemFile", L"Info", 0);
   return E_NOTIMPL;
 }
