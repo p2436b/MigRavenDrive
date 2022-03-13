@@ -10,7 +10,7 @@
 CMigRavenFileItem::CMigRavenFileItem(CShellFolder* pFolder, PCIDLIST_RELATIVE pidlFolder, PCITEMID_CHILD pidlItem, BOOL bReleaseItem) :
   CNseFileItem(pFolder, pidlFolder, pidlItem, bReleaseItem)
 {
-  if (pidlItem == NULL)
+  if (pidlItem == nullptr)
   {
     // Create empty root item
     static MIG_FSS_DATA s_mfdEmpty = { 0 };
@@ -207,7 +207,21 @@ CNseItem* CMigRavenFileItem::GenerateChild(CShellFolder* pFolder, PCIDLIST_RELAT
 
 HRESULT CMigRavenFileItem::GetChild(LPCWSTR pstrName, SHGNO ParseType, CNseItem** pItem)
 {
-  return E_OUTOFMEMORY;
+  wstring childPath = m_pMfd->wszUncPath + L"\\"s + pstrName;
+
+  WIN32_FIND_DATA wfd;
+  auto hFind = FindFirstFile(childPath.c_str(), &wfd);
+
+  MIG_FSS_DATA mfd{};
+  mfd.dwAttributes = MR_ATTRIBUTE_SYSTEM;
+
+  if (hFind != INVALID_HANDLE_VALUE) {
+    wcscpy_s(mfd.wszUncPath, childPath.c_str());
+    wfd.cAlternateFileName[1] == VFS_HACK_SAVEAS_JUNCTION;
+    *pItem = GenerateChild(m_pFolder, m_pFolder->m_pidlFolder, wfd, mfd);
+  }
+  FindClose(hFind);
+  return *pItem != nullptr ? S_OK : E_OUTOFMEMORY;
 }
 
 HRESULT CMigRavenFileItem::EnumChildren(HWND hwndOwner, SHCONTF grfFlags, CSimpleValArray<CNseItem*>& aList)
@@ -255,7 +269,19 @@ HRESULT CMigRavenFileItem::GetStream(const VFS_STREAM_REASON& Reason, CNseFileSt
 
 HRESULT CMigRavenFileItem::CreateFolder()
 {
-  MessageBox(0, L"CMigRavenFileItem::CreateFolder", L"Info", 0);
+  // Create new directory in archive
+  WCHAR wszFolderPath[MAX_PATH] = { '\0' };
+  HR(GetPathQuick(m_pidlFolder, m_pidlItem, wszFolderPath));
+  CreateDirectory(wszFolderPath, nullptr);
+
+  // Update properties of our NSE Item
+  auto hFind = FindFirstFile(wszFolderPath, m_pWfd);
+  m_pWfd->cAlternateFileName[1] == VFS_HACK_SAVEAS_JUNCTION;
+  FindClose(hFind);
+
+  m_pMfd->dwAttributes = MR_ATTRIBUTE_SYSTEM;
+  wcscpy_s(m_pMfd->wszUncPath, wszFolderPath);
+
   return S_OK;
 }
 
@@ -548,4 +574,29 @@ HINSTANCE CMigRavenFileItem::ExecuteFSSCommand(HWND hwndOwner, PCWCHAR pwszOpera
   swprintf(wszParameters, MAX_PATH, L"%s \"%s\"", pwszOperation, pwszFolderPath);
 
   return ShellExecute(hwndOwner, L"open", wszFssAppPath, wszParameters, nullptr, SW_NORMAL);
+}
+
+HRESULT CMigRavenFileItem::GetPathQuick(PCIDLIST_RELATIVE pidlPath, PCITEMID_CHILD pidlChild, LPWSTR pszPath) const
+{
+  wstring parentPath{};
+  wstring childPath{};
+  ATLASSERT(ILIsAligned64(pidlPath));
+  if (::ILIsEmpty(pidlPath)) {
+    pidlPath = pidlChild;
+    pidlChild = nullptr;
+  }
+  while (!::ILIsEmpty(pidlPath)) {
+    const MIG_FSS_DATA* pMfd = &(reinterpret_cast<const NSEFILEPIDLDATA*>(pidlPath))->mfd;
+    parentPath = pMfd->wszUncPath;
+    pidlPath = static_cast<PCIDLIST_RELATIVE>(::ILNext(pidlPath));
+  }
+  if (!::ILIsEmpty(pidlChild)) {
+    ATLASSERT(::ILIsChild(pidlChild));
+    const WIN32_FIND_DATA* pWfd = &(reinterpret_cast<const NSEFILEPIDLDATA*>(pidlChild))->wfd;
+    childPath = pWfd->cFileName;
+  }
+
+  wstring path = parentPath + L"\\"s + childPath;
+  wcscpy_s(pszPath, MAX_PATH, path.c_str());
+  return S_OK;
 }
