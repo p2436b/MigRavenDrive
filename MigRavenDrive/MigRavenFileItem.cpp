@@ -287,7 +287,22 @@ HRESULT CMigRavenFileItem::CreateFolder()
 
 HRESULT CMigRavenFileItem::Rename(LPCWSTR pstrNewName, LPWSTR pstrOutputName)
 {
-  MessageBox(0, L"CMigRavenFileItem::Rename", L"Info", 0);
+  WCHAR wszOldFileName[MAX_PATH] = { '\0' };
+  HR(GetPathQuick(m_pidlFolder, m_pidlItem, wszOldFileName));
+
+  // The Shell often doesn't include the filename extension in the renamed filename, so we'll append it now.
+  if (wcschr(pstrOutputName, '.') == NULL)
+    ::PathCchAddExtension(pstrOutputName, MAX_PATH, ::PathFindExtension(wszOldFileName));
+
+  WCHAR wszNewFileName[MAX_PATH] = { '\0' };
+  wcscpy_s(wszNewFileName, wszOldFileName);
+  PathRemoveFileSpec(wszNewFileName);
+  ::PathCchAppend(wszNewFileName, MAX_PATH, pstrOutputName);
+
+  // Rename the item
+  if (_wrename(wszOldFileName, wszNewFileName) != 0)
+    MessageBox(0, L"Could not rename the selected file/folder.", L"Error", MB_ICONERROR);
+
   return S_OK;
 }
 
