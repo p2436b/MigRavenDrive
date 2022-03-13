@@ -5,6 +5,7 @@
 #include <Utils.h>
 #include <NamedPipe.h>
 #include "ShPropKeys.h"
+#include "PathCch.h"
 
 CMigRavenFileItem::CMigRavenFileItem(CShellFolder* pFolder, PCIDLIST_RELATIVE pidlFolder, PCITEMID_CHILD pidlItem, BOOL bReleaseItem) :
   CNseFileItem(pFolder, pidlFolder, pidlItem, bReleaseItem)
@@ -27,6 +28,14 @@ CMigRavenFileItem::CMigRavenFileItem(CShellFolder* pFolder, PCIDLIST_RELATIVE pi
 
 SFGAOF CMigRavenFileItem::GetSFGAOF(SFGAOF dwMask)
 {
+  if (m_pMfd->dwAttributes == MR_ATTRIBUTE_SYSTEM && !IsRoot())
+    return CNseFileItem::GetSFGAOF(dwMask)
+    | SFGAO_CANCOPY
+    | SFGAO_CANMOVE
+    | SFGAO_CANDELETE
+    | SFGAO_CANRENAME
+    | SFGAO_HASPROPSHEET;
+
   return CNseFileItem::GetSFGAOF(dwMask);
 }
 
@@ -144,7 +153,7 @@ HRESULT CMigRavenFileItem::GetProperty(REFPROPERTYKEY pkey, CComPropVariant& v)
     };
 
     return GetStatusIcon(
-      2, 
+      2,
       m_pMfd->dwAgeBarCategory,
       propKeys,
       LR"(prop:MigRavenDrive.AgeStatus1;MigRavenDrive.AgeStatus2;MigRavenDrive.AgeStatus3;MigRavenDrive.AgeStatus4;
@@ -331,8 +340,30 @@ HMENU CMigRavenFileItem::GetMenu()
 
 HRESULT CMigRavenFileItem::ExecuteMenuCommand(VFS_MENUCOMMAND& Cmd)
 {
-  MessageBox(0, L"CMigRavenFileItem::ExecuteMenuCommand", L"Info", 0);
-  return S_OK;
+  switch (Cmd.wMenuID)
+  case ID_CONTEXT_FSS_NEWFOLDER: {
+    ExecuteFSSCommand(Cmd.hWnd, L"create", nullptr);
+    return S_OK;
+  case ID_CONTEXT_FSS_EDITFOLDER:
+    ExecuteFSSCommand(Cmd.hWnd, L"edit", m_pMfd->wszUncPath);
+    return S_OK;
+  case ID_CONTEXT_FSS_DELETEFOLDER:
+    ExecuteFSSCommand(Cmd.hWnd, L"delete", m_pMfd->wszUncPath);
+    return S_OK;
+  case ID_CONTEXT_MIGFOLDERPROPERTIES:
+    ExecuteFSSCommand(Cmd.hWnd, L"properties", m_pMfd->wszUncPath);
+    return S_OK;
+  case ID_CONTEXT_FSS_ARCHIVEFOLDER:
+    ExecuteFSSCommand(Cmd.hWnd, L"archive", m_pMfd->wszUncPath);
+    return S_OK;
+  case ID_CONTEXT_FSS_MIGRATEFOLDER:
+    ExecuteFSSCommand(Cmd.hWnd, L"migrate", m_pMfd->wszUncPath);
+    return S_OK;
+  case ID_CONTEXT_FSS_WEBCLIENT:
+    ExecuteFSSCommand(Cmd.hWnd, L"webclient", nullptr);
+    return S_OK;
+  }
+  return E_NOTIMPL;
 }
 
 
@@ -423,6 +454,7 @@ HRESULT CMigRavenFileItem::EnumSystemItems(HWND hwndOwner, SHCONTF grfFlags, CSi
 
     wstring filePath = m_pMfd->wszUncPath + L"\\"s + wfd.cFileName;
     wcscpy_s(mfd.wszUncPath, filePath.c_str());
+    wfd.cAlternateFileName[1] == VFS_HACK_SAVEAS_JUNCTION;
     aList.Add(GenerateChild(m_pFolder, m_pFolder->m_pidlFolder, wfd, mfd));
 
   } while (FindNextFile(hFind, &wfd) != FALSE);
@@ -501,4 +533,17 @@ HRESULT CMigRavenFileItem::GetStatusIcon(BYTE type, BYTE iconIndex, const vector
   PropVariantClear(&tmp);
 
   return hr;
+}
+
+HINSTANCE CMigRavenFileItem::ExecuteFSSCommand(HWND hwndOwner, PCWCHAR pwszOperation, PCWCHAR pwszFolderPath) const
+{
+  WCHAR wszFssAppPath[MAX_PATH]{ '\0' };
+  GetModuleFileName(_pModule->GetModuleInstance(), wszFssAppPath, MAX_PATH);
+  PathCchRemoveFileSpec(wszFssAppPath, MAX_PATH);
+  PathCchAppend(wszFssAppPath, MAX_PATH, L"migRavenFssApp.exe");
+
+  WCHAR wszParameters[MAX_PATH]{ '\0' };
+  swprintf(wszParameters, MAX_PATH, L"%s \"%s\"", pwszOperation, pwszFolderPath);
+
+  return ShellExecute(hwndOwner, L"open", wszFssAppPath, wszParameters, nullptr, SW_NORMAL);
 }
