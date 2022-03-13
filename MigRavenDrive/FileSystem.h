@@ -177,7 +177,7 @@ public:
 
   // Constructor
 
-  CMigRavenFileStream(CMigRavenFileSystem* pFS, LPCWSTR pstrFilename, UINT uAccess);
+  CMigRavenFileStream(CMigRavenFileSystem* pFS, LPCWSTR pstrFilename, UINT uAccess, DWORD dwFileSize);
   virtual ~CMigRavenFileStream();
 
   // CNseFileStream
@@ -199,5 +199,11 @@ public:
   virtual HRESULT Commit() override;
 
   virtual HRESULT Close() override;
+
+private:
+
+  HRESULT ReadSystemFile(LPCWSTR pwstrFileName, LPBYTE* ppbBuffer, DWORD& dwFileSize);
+
+  HRESULT WriteSystemFile(LPCWSTR pwstrFileName, LPBYTE* ppbBuffer, DWORD& dwFileSize, DWORD dwFlagsAndAttributes);
 
 };
