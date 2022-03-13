@@ -247,8 +247,10 @@ HRESULT CMigRavenFileItem::EnumChildren(HWND hwndOwner, SHCONTF grfFlags, CSimpl
 
 HRESULT CMigRavenFileItem::GetStream(const VFS_STREAM_REASON& Reason, CNseFileStream** ppFile)
 {
-  MessageBox(0, L"CMigRavenFileItem::GetStream", L"Info", 0);
-  return S_OK;
+  DWORD size = m_pWfd->nFileSizeHigh * (MAXDWORD + 1) + m_pWfd->nFileSizeLow;
+  *ppFile = new CMigRavenFileStream(dynamic_cast<CMigRavenFileSystem*>(m_pFolder->m_spFS.m_p), m_pMfd->wszUncPath, Reason.uAccess, size);
+
+  return *ppFile != nullptr ? S_OK : E_OUTOFMEMORY;
 }
 
 HRESULT CMigRavenFileItem::CreateFolder()
