@@ -145,6 +145,8 @@ private:
   HRESULT GetStatusIcon(BYTE type, BYTE iconIndex, const vector<PROPERTYKEY>& propKeys, PCWSTR propStr, CComPropVariant& v);
 
   HINSTANCE ExecuteFSSCommand(HWND hwndOwner, PCWCHAR pwszOperation, PCWCHAR pwszFolderPath) const;
+
+  HRESULT GetPathQuick(PCIDLIST_RELATIVE pidlPath, PCITEMID_CHILD pidlChild, LPWSTR pszPath) const;
 };
 
 
