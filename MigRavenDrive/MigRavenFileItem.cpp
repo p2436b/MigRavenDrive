@@ -1,9 +1,10 @@
 ﻿#include "pch.h"
+
+#include <string>
 #include "FileSystem.h"
 #include "ShellFolder.h"
-#include <string>
-#include <Utils.h>
-#include <NamedPipe.h>
+#include "Utils.h"
+#include "NamedPipe.h"
 #include "ShPropKeys.h"
 #include "PathCch.h"
 
@@ -24,6 +25,10 @@ CMigRavenFileItem::CMigRavenFileItem(CShellFolder* pFolder, PCIDLIST_RELATIVE pi
 
     ATLASSERT(pidlItem->mkid.cb >= sizeof(NSEFILEPIDLDATA));
   }
+}
+
+HRESULT CMigRavenFileItem::GetNameOf(SHGDNF uFlags, LPWSTR* ppstrRetVal)
+{
 }
 
 SFGAOF CMigRavenFileItem::GetSFGAOF(SFGAOF dwMask)
@@ -261,8 +266,11 @@ HRESULT CMigRavenFileItem::EnumChildren(HWND hwndOwner, SHCONTF grfFlags, CSimpl
 
 HRESULT CMigRavenFileItem::GetStream(const VFS_STREAM_REASON& Reason, CNseFileStream** ppFile)
 {
+  WCHAR wczPath[MAX_PATH]{ '\0' };
+  GetPathQuick(m_pidlFolder, m_pidlItem, wczPath);
+
   DWORD size = m_pWfd->nFileSizeHigh * (MAXDWORD + 1) + m_pWfd->nFileSizeLow;
-  *ppFile = new CMigRavenFileStream(dynamic_cast<CMigRavenFileSystem*>(m_pFolder->m_spFS.m_p), m_pMfd->wszUncPath, Reason.uAccess, size);
+  *ppFile = new CMigRavenFileStream(dynamic_cast<CMigRavenFileSystem*>(m_pFolder->m_spFS.m_p), wczPath, Reason.uAccess, size);
 
   return *ppFile != nullptr ? S_OK : E_OUTOFMEMORY;
 }
@@ -319,7 +327,7 @@ HRESULT CMigRavenFileItem::Delete()
       FO_DELETE,
       wszFileName,
       nullptr,
-      FOF_ALLOWUNDO | FOF_NO_UI,
+      FOF_NO_UI,
       FALSE
   };
 
@@ -422,7 +430,12 @@ HRESULT CMigRavenFileItem::ExecuteMenuCommand(VFS_MENUCOMMAND& Cmd)
   case ID_CONTEXT_FSS_WEBCLIENT:
     ExecuteFSSCommand(Cmd.hWnd, L"webclient", nullptr);
     return S_OK;
+  case DFM_CMD_PASTE:
+    auto hr = _DoPasteFiles(Cmd);
+    return hr;
   }
+
+  //MessageBox(0, L"CMigRavenFileItem::ExecuteMenuCommand", L"Info", 0);
   return E_NOTIMPL;
 }
 
