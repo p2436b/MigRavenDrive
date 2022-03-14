@@ -100,6 +100,8 @@ public:
 
   // CNseFileItem
 
+  virtual HRESULT GetNameOf(SHGDNF uFlags, LPWSTR* ppstrRetVal) override;
+
   virtual SFGAOF GetSFGAOF(SFGAOF dwMask) override;
 
   virtual HRESULT GetColumnInfo(UINT iColumn, VFS_COLUMNINFO& Column) override;
