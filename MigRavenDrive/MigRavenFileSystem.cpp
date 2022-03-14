@@ -44,6 +44,7 @@ BOOL CMigRavenModule::GetConfigBool(VFS_CONFIG Item)
   case VFS_SHOW_RIBBON_PANEL:
     return TRUE;
 
+  case VFS_HAVE_NAMEOF:
   case VFS_HAVE_SYSICONS:
   case VFS_HAVE_UNIQUE_NAMES:
   case VFS_HAVE_VIRTUAL_FILES:
