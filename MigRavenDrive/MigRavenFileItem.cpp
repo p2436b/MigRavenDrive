@@ -29,6 +29,14 @@ CMigRavenFileItem::CMigRavenFileItem(CShellFolder* pFolder, PCIDLIST_RELATIVE pi
 
 HRESULT CMigRavenFileItem::GetNameOf(SHGDNF uFlags, LPWSTR* ppstrRetVal)
 {
+  if (!IsBitSet(SHGDN_INFOLDER, uFlags) && IsBitSet(SHGDN_FORPARSING, uFlags))
+  {
+    WCHAR wczPath[MAX_PATH]{ '\0' };
+    GetPathQuick(m_pidlFolder, m_pidlItem, wczPath);
+    return SHStrDup(wczPath, ppstrRetVal);
+  }
+
+  return SHStrDup(m_pWfd->cFileName, ppstrRetVal);
 }
 
 SFGAOF CMigRavenFileItem::GetSFGAOF(SFGAOF dwMask)
