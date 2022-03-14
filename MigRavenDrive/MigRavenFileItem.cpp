@@ -308,7 +308,24 @@ HRESULT CMigRavenFileItem::Rename(LPCWSTR pstrNewName, LPWSTR pstrOutputName)
 
 HRESULT CMigRavenFileItem::Delete()
 {
-  MessageBox(0, L"CMigRavenFileItem::Delete", L"Info", 0);
+  WCHAR wszFileName[MAX_PATH] = { '\0' };
+  HR(GetPathQuick(m_pidlFolder, m_pidlItem, wszFileName));
+
+  // Must be double null terminated
+  wszFileName[wcslen(wszFileName) + 1] = '\0';
+
+  SHFILEOPSTRUCT shfo = {
+      nullptr,
+      FO_DELETE,
+      wszFileName,
+      nullptr,
+      FOF_ALLOWUNDO | FOF_NO_UI,
+      FALSE
+  };
+
+  if (SHFileOperation(&shfo) != 0)
+    MessageBox(0, L"Could not delete the selected files / folders.", L"Error", MB_ICONERROR);
+
   return S_OK;
 }
 
