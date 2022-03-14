@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "FileSystem.h"
 
-CMigRavenFileStream::CMigRavenFileStream(CMigRavenFileSystem* pFS, LPCWSTR pstrFilename, UINT uAccess, DWORD dwFileSize):
+CMigRavenFileStream::CMigRavenFileStream(CMigRavenFileSystem* pFS, LPCWSTR pstrFilename, UINT uAccess, DWORD dwFileSize) :
   m_uAccess(uAccess), m_pData(nullptr), m_dwCurPos(0), m_dwFileSize(dwFileSize), m_dwAllocSize(10L * 1024L)
 {
   m_spFS = pFS;
@@ -121,6 +121,13 @@ HRESULT CMigRavenFileStream::ReadSystemFile(LPCWSTR pwstrFileName, LPBYTE* ppbBu
 
 HRESULT CMigRavenFileStream::WriteSystemFile(LPCWSTR pwstrFileName, LPBYTE* ppbBuffer, DWORD& dwFileSize, DWORD dwFlagsAndAttributes)
 {
-  MessageBox(0, L"CMigRavenFileStream::WriteSystemFile", L"Info", 0);
-  return E_NOTIMPL;
+  auto hr = S_OK;
+  auto* hFile = CreateFile(pwstrFileName, GENERIC_WRITE, FILE_SHARE_READ, nullptr, CREATE_NEW, dwFlagsAndAttributes, nullptr);
+  if (hFile == INVALID_HANDLE_VALUE) return AtlHresultFromLastError();
+  DWORD dwBytesWrite = 0;
+  WriteFile(hFile, *ppbBuffer, dwFileSize, &dwBytesWrite, nullptr);
+  if (dwBytesWrite != dwFileSize) hr = AtlHresultFromLastError();
+  if (FAILED(hr)) free(ppbBuffer);
+  CloseHandle(hFile);
+  return hr;
 }
