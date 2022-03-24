@@ -261,6 +261,9 @@
     <None Include="..\ShFrwk\res\ShellRootShellNew.rgs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="MigRavenDrive.propdesc">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\migRavenIcon.ico">

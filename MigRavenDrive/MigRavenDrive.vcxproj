@@ -313,6 +313,7 @@
     <None Include="..\ShFrwk\res\ShellRootSendTo.rgs" />
     <None Include="..\ShFrwk\res\ShellRootShellNew.rgs" />
     <None Include="MigRavenDrive.def" />
+    <None Include="MigRavenDrive.propdesc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\archive.bmp" />
