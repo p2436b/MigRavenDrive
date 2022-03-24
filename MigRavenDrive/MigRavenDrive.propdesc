@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://schemas.microsoft.com/windows/2006/propertydescription"
+  schemaVersion="1.0">
+
+  <propertyDescriptionList publisher="Peyman.Bayat" product="MigRavenDrive">
+  
+    <propertyDescription name="MigRavenDrive.َAgeIconStatus" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5011">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-215"/>
+      <typeInfo type="Blob" isInnate="true" isViewable="true"/>
+      <displayInfo defaultColumnWidth="50">
+        <drawControl control="IconList"/>
+      </displayInfo>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.PreviewPaneIConStatus" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5010">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-209"/>
+      <typeInfo type="Blob" isInnate="true" isViewable="true"/>
+      <displayInfo defaultColumnWidth="10" alignment="Center">
+        <drawControl control="IconList"/>
+      </displayInfo>
+    </propertyDescription>
+	
+	<propertyDescription name="MigRavenDrive.StatusProgressBar" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5009">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-217"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo>	  
+        <drawControl control="PercentBar"/>
+      </displayInfo>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.Instruction" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5008">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-216"/>
+      <typeInfo type="String" isInnate="true" isViewable="true"/>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.FolderAge" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5007">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-215"/>
+      <typeInfo type="String" isInnate="true" isViewable="true"/>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.Permissions" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5006">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-214"/>
+      <typeInfo type="String" isInnate="true" isViewable="true"/>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.AccountCount" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5005">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-213"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.ScanDate" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5004">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-212"/>
+      <typeInfo type="DateTime" isInnate="true" isViewable="true"/>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.DateDelete" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5003">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-211"/>
+      <typeInfo type="DateTime" isInnate="true" isViewable="true"/>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.FilesCount" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5002">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-210"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+    </propertyDescription>
+	
+    <propertyDescription name="MigRavenDrive.UIIConStatus" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5001">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <labelInfo label="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-209"/>
+      <typeInfo type="Blob" isInnate="true" isViewable="true"/>
+      <displayInfo defaultColumnWidth="10" alignment="Center">
+        <drawControl control="IconList"/>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.IconStatus" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="5000">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="None" value="0" text="@propsys.dll,-42290"/>
+          <enum name="Sparse" value="1" text="@propsys.dll,-42291">
+            <image res="%systemroot%\system32\imageres.dll,-1404"/>
+          </enum>
+          <enum name="InSync" value="2" text="@propsys.dll,-42292">
+            <image res="%systemroot%\system32\imageres.dll,-1400"/>
+          </enum>
+          <enum name="Pinned" value="3" text="@propsys.dll,-42293">
+            <image res="%systemroot%\system32\imageres.dll,-1405"/>
+          </enum>
+          <enum name="PendingUpload" value="4" text="@propsys.dll,-42294">
+            <image res="%systemroot%\system32\imageres.dll,-1401"/>
+          </enum>
+          <enum name="PendingDownload" value="5" text="@propsys.dll,-42303">
+            <image res="%systemroot%\system32\imageres.dll,-1401"/>
+          </enum>
+          <enum name="Transferring" value="6" text="@propsys.dll,-42296">
+            <image res="%systemroot%\system32\imageres.dll,-1401"/>
+          </enum>
+          <enum name="Error" value="7" text="@C:\Users\Peyman\source\repos\MigRavenDrive\x64\Debug\MigRavenDrive.dll,-208">
+            <image res="%systemroot%\system32\imageres.dll,-1402"/>
+          </enum>
+          <enum name="Warning" value="8" text="@propsys.dll,-42316">
+            <image res="%systemroot%\system32\imageres.dll,-1403"/>
+          </enum>
+          <enum name="Excluded" value="9" text="@propsys.dll,-42319"/>
+          <enum name="Pending" value="10" text="@propsys.dll,-42324">
+            <image res="%systemroot%\system32\imageres.dll,-1401"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.AgeStatus1" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="4999">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="Empty" value="1" text="1">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-207"/>
+          </enum>
+          <enum name="Filled" value="2" text="-">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-208"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.AgeStatus2" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="4998">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="Empty" value="1" text="2">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-207"/>
+          </enum>
+          <enum name="Filled" value="2" text="-">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-208"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.AgeStatus3" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="4997">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="Empty" value="1" text="3">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-207"/>
+          </enum>
+          <enum name="Filled" value="2" text="-">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-208"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.AgeStatus4" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="4996">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="Empty" value="1" text="4">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-207"/>
+          </enum>
+          <enum name="Filled" value="2" text="-">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-208"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.AgeStatus5" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="4995">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="Empty" value="1" text="5">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-207"/>
+          </enum>
+          <enum name="Filled" value="2" text="-">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-208"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.AgeStatus6" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="4994">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="Empty" value="1" text="6">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-207"/>
+          </enum>
+          <enum name="Filled" value="2" text="-">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-208"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.AgeStatus7" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="4993">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="Empty" value="1" text="7">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-207"/>
+          </enum>
+          <enum name="Filled" value="2" text="-">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-208"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+
+    <propertyDescription name="MigRavenDrive.AgeStatus8" formatID="{D2E42C2C-1D9F-4494-9D1B-1E68E421D1AE}" propID="4992">
+      <searchInfo columnIndexType="NotIndexed"/>
+      <typeInfo type="UInt32" isInnate="true" isViewable="true"/>
+      <displayInfo displayType="Enumerated">
+        <enumeratedList>
+          <enum name="Empty" value="1" text="8">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-207"/>
+          </enum>
+          <enum name="Filled" value="2" text="-">
+            <image res="D:\Projects\migRavenDesktopClient\Bin\Debug\migRavenDrive.dll,-208"/>
+          </enum>
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+  
+  </propertyDescriptionList>
+</schema>
