@@ -507,10 +507,34 @@ STDMETHODIMP CShellFolder::CreateViewObject(HWND hwndOwner, REFIID riid, LPVOID*
   }
   if (riid == IID_IContextMenu)
   {
+    UINT cKeys = 0;
+    HKEY aKeys[3];
+    if (/*cidl*/0 == 0) // this must be a bind for a background menu
+    {
+      HKEY result;
+      LSTATUS st = RegOpenKeyEx(HKEY_CLASSES_ROOT, L"Directory\\Background", NULL, KEY_QUERY_VALUE, &result); // just check if it exists
+
+      if (st == ERROR_SUCCESS)
+      {
+        aKeys[cKeys] = result;
+        cKeys++;
+      }
+    }
+
     if (::IsMenu(m_hMenu)) ::DestroyMenu(m_hMenu);
     m_hMenu = m_spFolderItem->GetMenu();
     m_hContextMenu = ::GetSubMenu(m_hMenu, _T("ViewMenu"));
-    DEFCONTEXTMENU dcm = { hwndOwner, static_cast<IContextMenuCB*>(this), m_pidlMonitor, static_cast<IShellFolder*>(this), 0, NULL, NULL, 0, NULL };
+    DEFCONTEXTMENU dcm = { 
+      hwndOwner,
+      static_cast<IContextMenuCB*>(this), 
+      m_pidlMonitor,
+      static_cast<IShellFolder*>(this),
+      0, 
+      NULL,
+      NULL, 
+      cKeys,
+      aKeys
+    };
     return ::SHCreateDefaultContextMenu(&dcm, riid, ppRetVal);
   }
   if (riid == IID_IExplorerCommandProvider)
