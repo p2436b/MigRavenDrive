@@ -47,6 +47,7 @@ SFGAOF CMigRavenFileItem::GetSFGAOF(SFGAOF dwMask)
     | SFGAO_CANMOVE
     | SFGAO_CANDELETE
     | SFGAO_CANRENAME
+    | SFGAO_FILESYSTEM
     | SFGAO_HASPROPSHEET;
 
   return CNseFileItem::GetSFGAOF(dwMask);
